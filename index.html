@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f1419" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>在线播放</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/player.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <header class="header">
+        <p class="header__eyebrow">Stream</p>
+        <h1 class="header__title">音乐播放</h1>
+      </header>
+
+      <main class="main">
+        <section class="hero-card" aria-label="曲目信息">
+          <div class="hero-card__glow" aria-hidden="true"></div>
+
+          <div class="hero-top">
+            <div class="cover cover--sm" id="cover">
+              <div class="cover__placeholder" id="coverPlaceholder">
+                <svg class="cover__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M9 18V5l12-2v13M9 18c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm12-3c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <img class="cover__img" id="coverImg" alt="" width="120" height="120" hidden />
+            </div>
+
+            <div class="hero-meta">
+              <div class="meta-item" id="rowSong" hidden>
+                <span class="meta-item__k">歌曲</span>
+                <span class="meta-item__v" id="metaSong"></span>
+              </div>
+              <div class="meta-item" id="rowArtist" hidden>
+                <span class="meta-item__k">歌手</span>
+                <span class="meta-item__v" id="metaArtist"></span>
+              </div>
+              <div class="meta-item" id="rowAlbum" hidden>
+                <span class="meta-item__k">专辑</span>
+                <span class="meta-item__v" id="metaAlbum"></span>
+              </div>
+              <!-- <p class="hero-meta__source" id="audioSourceUrl" hidden></p> -->
+            </div>
+          </div>
+
+          <div class="lyrics" id="lyricsRoot" aria-label="歌词">
+            <p class="lyrics__label">歌词</p>
+            <div class="lyrics__viewport">
+              <div class="lyrics__scroll" id="lyricsScroll" role="log" aria-live="polite">
+                <p class="lyrics__placeholder" id="lyricsPlaceholder">暂无歌词</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" aria-label="播放控制">
+          <div class="progress" id="progressWrap">
+            <div class="progress__bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progress__fill" id="progressFill"></div>
+            </div>
+            <div class="progress__times">
+              <span id="timeCurrent">0:00</span>
+              <span id="timeTotal">0:00</span>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button type="button" class="btn btn--ghost" id="btnRewind" aria-label="后退 10 秒">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                <path d="M11 18V6l-8.5 6 8.5 6zm11 0V6l-8.5 6L22 18z" fill="currentColor" />
+              </svg>
+            </button>
+            <button type="button" class="btn btn--primary" id="btnPlay" aria-label="播放">
+              <svg class="icon-play" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            </button>
+            <button type="button" class="btn btn--ghost" id="btnForward" aria-label="前进 10 秒">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                <path d="M13 18V6l8.5 6L13 18zM2 18V6l8.5 6L2 18z" fill="currentColor" />
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <p class="error" id="errorMsg" role="alert" hidden></p>
+      </main>
+
+      <footer class="footer">
+        <span>仅供个人试听 · 请遵守版权与源站条款</span>
+      </footer>
+    </div>
+
+    <audio id="audio" preload="metadata" playsinline></audio>
+
+    <script src="js/config.js" defer></script>
+    <script src="js/format.js" defer></script>
+    <script src="js/url-resolver.js" defer></script>
+    <script src="js/lyrics-parser.js" defer></script>
+    <script src="js/audio-controller.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </body>
+</html>
