@@ -3,6 +3,7 @@ window.BOOKS_DATA = [
     "id": "sample_book",
     "title": "山海经异闻录",
     "author": "佚名",
+    "cover": "covers/sample_book.jpg",
     "chapters": [
       { "title": "第一章 初入山海", "file": "novels/sample_book/001.txt" },
       { "title": "第二章 异兽出没", "file": "novels/sample_book/002.txt" },
