@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   Settings.init();
 
   const params = new URLSearchParams(window.location.search);
@@ -6,12 +6,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   let currentChapter = parseInt(params.get('chapter')) || 0;
   let savedScroll = parseInt(params.get('scroll')) || 0;
 
-  let books = [];
-  let currentBook = null;
+  const books = window.BOOKS_DATA || [];
+  const currentBook = books.find(b => b.id === bookId);
 
   const header = document.getElementById('reader-header');
   const footer = document.getElementById('reader-footer');
   const content = document.getElementById('reader-content');
+  const contentWrapper = document.getElementById('content-wrapper');
   const settingsPanel = document.getElementById('settings-panel');
   const chapterList = document.getElementById('chapter-list');
   const overlay = document.getElementById('overlay');
@@ -22,27 +23,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   let menuVisible = false;
 
-  try {
-    const res = await fetch('data/books.json');
-    books = await res.json();
-    currentBook = books.find(b => b.id === bookId);
-
-    if (!currentBook) {
-      content.textContent = '未找到该书籍';
-      return;
-    }
-
-    bookTitleEl.textContent = currentBook.title;
-    await loadChapter(currentChapter);
-
-    if (savedScroll > 0) {
-      setTimeout(() => window.scrollTo(0, savedScroll), 100);
-    }
-  } catch (e) {
-    content.textContent = '加载失败';
+  if (!currentBook) {
+    content.textContent = '未找到该书籍';
+    return;
   }
 
-  async function loadChapter(index) {
+  bookTitleEl.textContent = currentBook.title;
+  loadChapter(currentChapter);
+
+  function loadChapter(index) {
     if (index < 0 || index >= currentBook.chapters.length) return;
     currentChapter = index;
     const chapter = currentBook.chapters[index];
@@ -50,15 +39,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     prevBtn.disabled = index === 0;
     nextBtn.disabled = index === currentBook.chapters.length - 1;
 
-    try {
-      const res = await fetch(chapter.file);
-      const text = await res.text();
-      content.textContent = text;
-      window.scrollTo(0, 0);
+    window.CHAPTER_CONTENT = '';
+    const script = document.createElement('script');
+    script.src = chapter.file;
+    script.onload = () => {
+      content.textContent = window.CHAPTER_CONTENT || '章节内容为空';
+      contentWrapper.scrollTop = 0;
       renderChapterList();
-    } catch (e) {
-      content.textContent = '章节加载失败';
-    }
+    };
+    script.onerror = () => {
+      content.textContent = '章节加载失败，请检查文件是否存在：' + chapter.file;
+    };
+    document.body.appendChild(script);
   }
 
   function toggleMenu() {
@@ -71,6 +63,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     settingsPanel.classList.remove('show');
     chapterList.classList.remove('show');
     overlay.classList.remove('show');
+    menuVisible = false;
+    header.classList.remove('show');
+    footer.classList.remove('show');
   }
 
   function renderChapterList() {
@@ -90,10 +85,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  content.addEventListener('click', (e) => {
-    const rect = content.getBoundingClientRect();
+  contentWrapper.addEventListener('click', (e) => {
+    const rect = contentWrapper.getBoundingClientRect();
     const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     const width = rect.width;
+    const height = rect.height;
+
+    if (y < 60 || y > height - 60) return;
+
     if (x < width * 0.3) {
       if (currentChapter > 0) loadChapter(currentChapter - 1);
     } else if (x > width * 0.7) {
@@ -137,14 +137,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   window.addEventListener('beforeunload', () => {
-    Storage.saveProgress(bookId, currentChapter, window.scrollY);
+    Storage.saveProgress(bookId, currentChapter, contentWrapper.scrollTop);
   });
 
   let saveTimer = null;
-  window.addEventListener('scroll', () => {
+  contentWrapper.addEventListener('scroll', () => {
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => {
-      Storage.saveProgress(bookId, currentChapter, window.scrollY);
+      Storage.saveProgress(bookId, currentChapter, contentWrapper.scrollTop);
     }, 500);
   });
+
+  if (savedScroll > 0) {
+    setTimeout(() => contentWrapper.scrollTop = savedScroll, 200);
+  }
 });
