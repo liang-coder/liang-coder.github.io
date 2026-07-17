@@ -17,9 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ? `${chapterTitle}`
       : '未阅读';
 
+    const coverHtml = book.cover
+      ? `<div class="book-cover"><img src="${book.cover}" alt="${book.title}" onerror="this.parentElement.innerHTML='${book.title.substring(0, 2)}'"></div>`
+      : `<div class="book-cover">${book.title.substring(0, 2)}</div>`;
+
     return `
       <div class="book-card" data-id="${book.id}">
-        <div class="book-cover">${book.title.substring(0, 2)}</div>
+        ${coverHtml}
         <div class="book-title">${book.title}</div>
         <div class="book-author">${book.author}</div>
         <div class="book-progress">${progressText}</div>
