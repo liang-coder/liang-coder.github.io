@@ -2,28 +2,32 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>阅读器</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="reader-header" id="reader-header">
-    <button class="btn btn-icon" id="back-btn">&larr;</button>
-    <span id="book-title"></span>
-    <div>
-      <button class="btn btn-icon" id="settings-btn">&#9881;</button>
-      <button class="btn btn-icon" id="chapter-btn">&#9776;</button>
-    </div>
-  </div>
-
   <div class="reader-container">
-    <div class="reader-content" id="reader-content"></div>
-  </div>
+    <div class="reader-header" id="reader-header">
+      <button class="btn btn-icon" id="back-btn">&larr;</button>
+      <span class="reader-header-title" id="book-title"></span>
+      <div>
+        <button class="btn btn-icon" id="settings-btn">&#9881;</button>
+        <button class="btn btn-icon" id="chapter-btn">&#9776;</button>
+      </div>
+    </div>
 
-  <div class="reader-footer" id="reader-footer">
-    <button class="btn" id="prev-btn">上一章</button>
-    <span id="chapter-title"></span>
-    <button class="btn" id="next-btn">下一章</button>
+    <div class="reader-content-wrapper" id="content-wrapper">
+      <div class="reader-content" id="reader-content"></div>
+    </div>
+
+    <div class="reader-footer" id="reader-footer">
+      <button class="btn" id="prev-btn">上一章</button>
+      <span class="reader-footer-chapter" id="chapter-title"></span>
+      <button class="btn" id="next-btn">下一章</button>
+    </div>
   </div>
 
   <div class="overlay" id="overlay"></div>
@@ -35,9 +39,10 @@
       <button class="btn btn-icon" id="chapter-close">&larr;</button>
       <span>目录</span>
     </div>
-    <div id="chapter-list-content"></div>
+    <div class="chapter-list-content" id="chapter-list-content"></div>
   </div>
 
+  <script src="data/books.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/settings.js"></script>
   <script src="js/reader.js"></script>
