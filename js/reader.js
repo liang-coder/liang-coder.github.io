@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   Settings.init();
 
   const params = new URLSearchParams(window.location.search);
@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   bookTitleEl.textContent = currentBook.title;
-  loadChapter(currentChapter);
+  await loadChapter(currentChapter);
 
-  function loadChapter(index) {
+  async function loadChapter(index) {
     if (index < 0 || index >= currentBook.chapters.length) return;
     currentChapter = index;
     const chapter = currentBook.chapters[index];
@@ -39,18 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     prevBtn.disabled = index === 0;
     nextBtn.disabled = index === currentBook.chapters.length - 1;
 
-    window.CHAPTER_CONTENT = '';
-    const script = document.createElement('script');
-    script.src = chapter.file;
-    script.onload = () => {
-      content.textContent = window.CHAPTER_CONTENT || '章节内容为空';
+    try {
+      const res = await fetch(chapter.file);
+      const text = await res.text();
+      content.textContent = text;
       contentWrapper.scrollTop = 0;
       renderChapterList();
-    };
-    script.onerror = () => {
-      content.textContent = '章节加载失败，请检查文件是否存在：' + chapter.file;
-    };
-    document.body.appendChild(script);
+    } catch (e) {
+      content.textContent = '章节加载失败，请确保通过本地服务器访问（双击 start.bat 启动）';
+    }
   }
 
   function toggleMenu() {
