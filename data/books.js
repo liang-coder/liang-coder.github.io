@@ -47,5 +47,44 @@ window.BOOKS_DATA = [
     { "title": "第29章 余波", "file": "novels/venomous-girl-asylum/chapter-029.txt" },
     { "title": "第30章 新的开始", "file": "novels/venomous-girl-asylum/chapter-030.txt" }
   ]
+},
+  {
+  "id": "growth-journey-maosong",
+  "title": "我在茂松的成长之路",
+  "author": "折语",
+  "cover": "covers/maosong.png",
+  "chapters": [
+    { "title": "第1章 茂松的第一天", "file": "novels/maosong/第01章-茂松的第一天.txt" },
+    { "title": "第2章 背锅的艺术", "file": "novels/maosong/第02章-背锅的艺术.txt" },
+    { "title": "第3章 第一次反击", "file": "novels/maosong/第03章-第一次反击.txt" },
+    { "title": "第4章 在阴影里扎根", "file": "novels/maosong/第04章-在阴影里扎根.txt" },
+    { "title": "第5章 996是福报", "file": "novels/maosong/第05章-996是福报.txt" },
+    { "title": "第6章 撕破脸", "file": "novels/maosong/第06章-撕破脸.txt" },
+    { "title": "第7章 成为主管", "file": "novels/maosong/第07章-成为主管.txt" },
+    { "title": "第8章 Breach的秘密", "file": "novels/maosong/第08章-Breach的秘密.txt" },
+    { "title": "第9章 铁三角新形态", "file": "novels/maosong/第09章-铁三角新形态.txt" },
+    { "title": "第10章 数据迷雾", "file": "novels/maosong/第10章-数据迷雾.txt" },
+    { "title": "第11章 博弈的代价", "file": "novels/maosong/第11章-博弈的代价.txt" },
+    { "title": "第12章 一星之火", "file": "novels/maosong/第12章-一星之火.txt" },
+    { "title": "第13章 空出来的位置", "file": "novels/maosong/第13章-空出来的位置.txt" },
+    { "title": "第14章 Enjoy的面孔", "file": "novels/maosong/第14章-Enjoy的面孔.txt" },
+    { "title": "第15章 左右逢源", "file": "novels/maosong/第15章-左右逢源.txt" },
+    { "title": "第16章 边界测试", "file": "novels/maosong/第16章-边界测试.txt" },
+    { "title": "第17章 无法拒绝的条件", "file": "novels/maosong/第17章-无法拒绝的条件.txt" },
+    { "title": "第18章 孤军", "file": "novels/maosong/第18章-孤军.txt" },
+    { "title": "第19章 用规则打败规则", "file": "novels/maosong/第19章-用规则打败规则.txt" },
+    { "title": "第20章 Frank的遗产", "file": "novels/maosong/第20章-Frank的遗产.txt" },
+    { "title": "第21章 以退为进", "file": "novels/maosong/第21章-以退为进.txt" },
+    { "title": "第22章 孵化部的奇迹", "file": "novels/maosong/第22章-孵化部的奇迹.txt" },
+    { "title": "第23章 权力之环", "file": "novels/maosong/第23章-权力之环.txt" },
+    { "title": "第24章 棋盘之外", "file": "novels/maosong/第24章-棋盘之外.txt" },
+    { "title": "第25章 棋逢对手", "file": "novels/maosong/第25章-棋逢对手.txt" },
+    { "title": "第26章 Enjoy的困境", "file": "novels/maosong/第26章-Enjoy的困境.txt" },
+    { "title": "第27章 三人组重组+鳄鱼入局", "file": "novels/maosong/第27章-三人组重组+鳄鱼入局.txt" },
+    { "title": "第28章 董事会风暴", "file": "novels/maosong/第28章-董事会风暴.txt" },
+    { "title": "第29章 最后的底牌", "file": "novels/maosong/第29章-最后的底牌.txt" },
+    { "title": "第30章 茂松之外", "file": "novels/maosong/第30章-茂松之外.txt" }
+  ]
 }
+
 ];
