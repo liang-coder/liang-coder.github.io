@@ -85,6 +85,21 @@ window.BOOKS_DATA = [
     { "title": "第29章 最后的底牌", "file": "novels/maosong/第29章-最后的底牌.txt" },
     { "title": "第30章 茂松之外", "file": "novels/maosong/第30章-茂松之外.txt" }
   ]
+},
+{
+  "id": "spring_comes_autumn_goes",
+  "title": "春来秋去",
+  "author": "折语",
+  "cover": "covers/spring-comes-autumn-goes.png",
+  "chapters": [
+    { "title": "第1章 他在画一个陌生人", "file": "novels/spring_comes_autumn_goes/第01章-他在画一个陌生人.txt" },
+    { "title": "第2章 「你的字写得不错」", "file": "novels/spring_comes_autumn_goes/第02章-「你的字写得不错」.txt" },
+    { "title": "第3章 不是公事", "file": "novels/spring_comes_autumn_goes/第03章-不是公事.txt" },
+    { "title": "第4章 暑假、画室、和蝉鸣", "file": "novels/spring_comes_autumn_goes/第04章-暑假、画室、和蝉鸣.txt" },
+    { "title": "第5章 那件连衣裙比他想象的好看", "file": "novels/spring_comes_autumn_goes/第05章-那件连衣裙比他想象的好看.txt" },
+    { "title": "第6章 九月", "file": "novels/spring_comes_autumn_goes/第06章-九月.txt" },
+    { "title": "第7章 吵架的原因是一幅画", "file": "novels/spring_comes_autumn_goes/第07章-吵架的原因是一幅画.txt" },
+    { "title": "第8章 屋顶只有我和你", "file": "novels/spring_comes_autumn_goes/第08章-屋顶只有我和你.txt" }
+  ]
 }
-
 ];
